@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bharat Technologies</title>
+    <style>
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation Styles */
+        .main-nav {
+            background: #002147;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
+            color: #fff;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .main-nav-links {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .mn-dropdown {
+            position: relative;
+        }
+
+        .mn-dropdown > a {
+            color: #fff;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: block;
+        }
+
+        .mn-dropdown-content {
+            display: none;
+            position: absolute;
+            background: #fff;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            top: 100%;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .mn-dropdown:hover .mn-dropdown-content {
+            display: block;
+        }
+
+        .mn-dropdown-content a {
+            color: #333;
+            padding: 12px 16px;
+            display: block;
+            text-decoration: none;
+            transition: background 0.3s;
+        }
+
+        .mn-dropdown-content a:hover {
+            background: #f8f9fa;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(233, 13, 13, 0.8), rgba(221, 81, 6, 0.8)),
+                        url('tech-bg.jpg') center/cover;
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: #fff;
+            padding: 0 5%;
+        }
+
+        .hero-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .hero-button {
+            background: #007bff;
+            color: #fff;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+
+        .hero-button:hover {
+            background: #0056b3;
+        }
+
+        /* Footer Styles */
+        .primary-footer {
+            background: #002147;
+            color: #fff;
+            padding: 2rem 5%;
+        }
+
+        .secondary-footer {
+            background: #f8f9fa;
+            padding: 2rem 5%;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: #333;
+            text-decoration: none;
+        }
+
+        .primary-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* Mobile Menu */
+        .menu-toggle {
+            display: none;
+            color: #fff;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .main-nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: #003d47;
+                flex-direction: column;
+                padding: 1rem;
+            }
+
+            .main-nav-links.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .mn-dropdown-content {
+                position: static;
+                box-shadow: none;
+                background: transparent;
+            }
+
+            .mn-dropdown-content a {
+                color: #fff;
+                padding-left: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="main-nav">
+        <div class="logo">Bharat Technologies</div>
+        <div class="menu-toggle">☰</div>
+        <div class="main-nav-links">
+            <!-- Keep your existing dropdown structure here -->
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Pioneering Digital Transformation</h1>
+            <p>Empowering enterprises with AI-driven solutions and secure cloud infrastructure</p>
+            <a href="#" class="hero-button">Explore Innovations</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="features">
+            <div class="feature-card">
+                <h3>AI Solutions</h3>
+                <p>Advanced artificial intelligence platforms for enterprise optimization</p>
+            </div>
+            <!-- Add more feature cards -->
+        </section>
+    </main>
+
+    <footer class="secondary-footer">
+        <div class="footer-links">
+            <!-- Keep your existing footer links -->
+        </div>
+    </footer>
+
+    <footer class="primary-footer">
+        <div class="primary-content">
+            <p>&copy; 2025 Bharat Technologies. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">X.com</a>
+                <a href="#">GitHub</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.querySelector('.menu-toggle').addEventListener('click', () => {
+            document.querySelector('.main-nav-links').classList.toggle('active');
+        });
+    </script>
+</body>
+</html>

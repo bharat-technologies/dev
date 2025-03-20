@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apple Style with Dynamic Galaxy</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        .galaxy {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .nebula-core {
+            position: absolute;
+            width: 150%;
+            height: 150%;
+            background: 
+                radial-gradient(circle at 50% 50%, 
+                    rgba(16, 0, 43, 0.5) 0%,
+                    transparent 60%),
+                radial-gradient(circle at 30% 40%, 
+                    rgba(54, 11, 64, 0.3) 0%,
+                    transparent 50%),
+                radial-gradient(circle at 70% 60%, 
+                    rgba(13, 27, 72, 0.3) 0%,
+                    transparent 50%);
+            animation: pulse 40s infinite alternate;
+            mix-blend-mode: screen;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(20px);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            position: relative;
+            padding: 5px 0;
+            transition: all 0.3s ease;
+            opacity: 0.8;
+        }
+
+        .nav a:hover {
+            opacity: 1;
+            filter: brightness(1.1);
+        }
+
+        .nav a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            bottom: 0;
+            left: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .nav a:hover::after {
+            width: 100%;
+            left: 0;
+        }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(0, 0, 0, 0.8) 0%,
+                rgba(0, 0, 0, 0.9) 70%);
+            z-index: 0;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 0.7; transform: scale(1.2); }
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes glow {
+            0%, 100% { opacity: 0.8; filter: brightness(1); }
+            50% { opacity: 1; filter: brightness(1.5); }
+        }
+
+        @keyframes shoot {
+            0% { transform: translateX(-100%); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateX(200%); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="galaxy">
+        <div class="nebula-core"></div>
+        <div class="star-cluster" id="cluster1"></div>
+        <div class="star-cluster" id="cluster2"></div>
+        <div class="star-cluster" id="cluster3"></div>
+    </div>
+
+    <nav class="nav">
+        <div class="logo">StellarTech</div>
+        <div class="nav-links">
+            <a href="#">Technology</a>
+            <a href="#">Products</a>
+            <a href="#">Services</a>
+            <a href="#">Support</a>
+            <a href="#">Contact</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Innovation Meets the Cosmos</h1>
+        <p>Explore the universe of cutting-edge technology</p>
+        <a href="#" class="cta-button">Discover More</a>
+    </section>
+
+    <script>
+        function gaussianRandom() {
+            let u = 0, v = 0;
+            while(u === 0) u = Math.random();
+            while(v === 0) v = Math.random();
+            return Math.sqrt(-2.0 * Math.log(u)) * Math.cos(2.0 * Math.PI * v) * 0.5;
+        }
+
+        function createStar(clusterElement, count) {
+            for (let i = 0; i < count; i++) {
+                const star = document.createElement('div');
+                star.style.cssText = `
+                    position: absolute;
+                    border-radius: 50%;
+                    transition: all 5s ease-in-out;
+                    animation: twinkle ${5 + Math.random() * 10}s infinite,
+                               glow ${10 + Math.random() * 20}s infinite;
+                `;
+
+                const size = Math.random() ** 3 * 2;
+                const x = 50 + gaussianRandom() * 30;
+                const y = 50 + gaussianRandom() * 30;
+                
+                Object.assign(star.style, {
+                    left: `${x}%`,
+                    top: `${y}%`,
+                    width: `${size}px`,
+                    height: `${size}px`,
+                    opacity: '0.8'
+                });
+
+                const updateColor = () => {
+                    const hue = Math.random() * 360;
+                    const lightness = 50 + Math.random() * 20;
+                    star.style.backgroundColor = `hsl(${hue}, 70%, ${lightness}%)`;
+                    setTimeout(updateColor, 5000 + Math.random() * 10000);
+                };
+
+                updateColor();
+                clusterElement.appendChild(star);
+            }
+        }
+
+        function createShootingStar() {
+            const star = document.createElement('div');
+            star.style.cssText = `
+                position: fixed;
+                width: 150px;
+                height: 2px;
+                background: linear-gradient(90deg, transparent, hsl(${Math.random()*360}, 100%, 80%), transparent);
+                filter: blur(1px);
+                animation: shoot 1.5s linear;
+                z-index: 999;
+                top: ${Math.random() * 100}%;
+                left: ${Math.random() * 100}%;
+            `;
+            document.body.appendChild(star);
+            setTimeout(() => star.remove(), 1500);
+        }
+
+        // Initialize galaxy
+        createStar(document.getElementById('cluster1'), 400);
+        createStar(document.getElementById('cluster2'), 300);
+        createStar(document.getElementById('cluster3'), 200);
+        setInterval(createShootingStar, 10000);
+    </script>
+</body>
+</html>

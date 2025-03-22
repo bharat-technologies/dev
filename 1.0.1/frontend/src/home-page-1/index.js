@@ -214,4 +214,38 @@ document.querySelectorAll('.section, .feature-card, .gallery-item').forEach(el =
     observer.observe(el);
 });
 
+// Replace the existing dropdown functionality with this simplified version
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('.mn-dropdown');
+    
+    // Handle dropdown toggle
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        const content = dropdown.querySelector('.mn-dropdown-content');
+        
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
+            
+            // Close all other dropdowns
+            dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.querySelector('.mn-dropdown-content').classList.remove('active');
+                }
+            });
+            
+            // Toggle current dropdown
+            content.classList.toggle('active');
+        });
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mn-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.querySelector('.mn-dropdown-content').classList.remove('active');
+            });
+        }
+    });
+});
+
 

@@ -108,18 +108,29 @@ body {
     opacity: 0.8;
 }
 
-.main-nav-links a:hover {
-    opacity: 1;
-    color: var(--accent-color);
+.main-nav-links a::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--light-color);
+    transition: width 0.3s ease;
+}
+
+.main-nav-links a:hover::after {
+    width: 100%;
 }
 
 .main-nav-links a i {
     margin-right: 0.5rem;
 }
 
-/* Dropdown Menu */
+/* Dropdown Menu - Updated styles */
 .mn-dropdown {
     position: relative;
+    cursor: pointer;
 }
 
 .mn-dropdown-content {
@@ -135,20 +146,29 @@ body {
     z-index: 1000;
 }
 
-.mn-dropdown:hover .mn-dropdown-content {
+.mn-dropdown-content.active {
     display: block;
+}
+
+/* Remove the underline effect for dropdown items */
+.mn-dropdown-content a::after {
+    display: none;
 }
 
 .mn-dropdown-content a {
     padding: 0.8rem 1.5rem;
     display: flex;
     align-items: center;
-    transition: var(--transition);
+    color: var(--light-color);
+    text-decoration: none;
+    opacity: 0.8;
+    transition: background-color 0.3s ease;
 }
 
 .mn-dropdown-content a:hover {
-    background: rgba(255, 255, 255, 0.788);
-    color: var(--accent-color);
+    background: #ffffff;
+    color: #000000;
+    opacity: 1;
 }
 
 /* Hero Section */
@@ -566,3 +586,80 @@ body {
 .mt-2 { margin-top: 2rem; }
 .mb-1 { margin-bottom: 1rem; }
 .mb-2 { margin-bottom: 2rem; }
+
+/* Remove any custom contact button styles */
+.contact-btn {
+    color: var(--light-color);
+    text-decoration: none;
+    opacity: 0.8;
+}
+
+.contact-btn:hover {
+    opacity: 1;
+    color: var(--accent-color);
+}
+
+.contact-dropdown {
+    min-width: 280px;
+    padding: 1rem 0;
+}
+
+.contact-quick-info {
+    padding: 0.8rem 1.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    margin-bottom: 0.5rem;
+}
+
+.contact-quick-info h4 {
+    color: var(--accent-color);
+    margin-bottom: 0.2rem;
+}
+
+.contact-quick-info p {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}
+
+.contact-item-link {
+    padding: 1rem 1.5rem !important;
+    display: flex !important;
+    align-items: center;
+    gap: 1rem !important;
+}
+
+.contact-item-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.contact-item-details span {
+    font-weight: 500;
+}
+
+.contact-item-details small {
+    font-size: 0.8rem;
+    opacity: 0.7;
+}
+
+.contact-item-link:hover .contact-item-details small {
+    opacity: 1;
+}
+
+.dropdown-logo {
+    margin-top: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.dropdown-logo img {
+    height: 30px;
+    width: auto;
+}
+
+.dropdown-logo span {
+    font-size: 0.9rem;
+    opacity: 0.7;
+}

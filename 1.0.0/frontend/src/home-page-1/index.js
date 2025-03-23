@@ -1,78 +1,217 @@
-function createGalaxy() {
-    const galaxy = document.getElementById('galaxy');
-    const starCount = 1500; // Increased star density
-    const layers = 3; // Star depth layers
+// Initialize AOS (Animate On Scroll)
+AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+});
 
-    // Create star layers with depth effect
-    for (let layer = 0; layer < layers; layer++) {
-        const layerElement = document.createElement('div');
-        layerElement.className = `star-layer layer-${layer + 1}`;
-        
-        for (let i = 0; i < starCount/layers; i++) {
-            const star = createStar(layer);
-            layerElement.appendChild(star);
-        }
-        galaxy.appendChild(layerElement);
+// Loader
+window.addEventListener('load', () => {
+    const loader = document.querySelector('.loader');
+    loader.style.opacity = '0';
+    setTimeout(() => {
+        loader.style.display = 'none';
+    }, 500);
+});
+
+// Navigation
+const mainNav = document.getElementById('main-nav');
+const navLinks = document.querySelectorAll('.main-nav-links a');
+
+// Change navbar background on scroll
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+        mainNav.style.background = 'rgba(0, 0, 0, 0.95)';
+        mainNav.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.3)';
+    } else {
+        mainNav.style.background = 'rgba(0, 0, 0, 0.9)';
+        mainNav.style.boxShadow = 'none';
     }
+});
 
-    // Enhanced shooting stars with parabolic paths
-    setInterval(() => {
-        createShootingStar();
-    }, 2500); // More frequent shooting stars
+// Mobile menu toggle
+function togglebtn() {
+    const navLinks = document.querySelector('.main-nav-links');
+    navLinks.classList.toggle('active');
 }
 
-function createStar(layer) {
-    const star = document.createElement('div');
-    const sizeBase = 0.5 + (layer * 0.3);
-    const x = Math.random() * 100;
-    const y = Math.random() * 100;
-    const hue = Math.random() * 360;
-    const animationDuration = 3 + (layer * 2) + Math.random() * 5;
+// Close mobile menu when clicking outside
+document.addEventListener('click', (e) => {
+    const navLinks = document.querySelector('.main-nav-links');
+    const menuButton = document.querySelector('.fa-bars');
+    
+    if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
+        navLinks.classList.remove('active');
+    }
+});
 
-    star.style.cssText = `
-        position: absolute;
-        border-radius: 50%;
-        animation: 
-            twinkle ${animationDuration}s infinite,
-            colorShift ${30 + Math.random() * 30}s infinite;
-        left: ${x}%;
-        top: ${y}%;
-        width: ${Math.random() ** 4 * 3 * sizeBase}px;
-        height: ${Math.random() ** 4 * 3 * sizeBase}px;
-        background: hsl(${hue}, ${70 - (layer * 10)}%, ${70 - (layer * 5)}%);
-        opacity: ${0.6 + (layer * 0.1)};
-        filter: blur(${layer}px);
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const headerOffset = 80;
+            const elementPosition = target.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+
+            // Close mobile menu after clicking
+            const navLinks = document.querySelector('.main-nav-links');
+            navLinks.classList.remove('active');
+        }
+    });
+});
+
+// Back to Top Button
+const backToTopButton = document.getElementById('backToTop');
+
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        backToTopButton.style.display = 'flex';
+    } else {
+        backToTopButton.style.display = 'none';
+    }
+});
+
+backToTopButton.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
+
+// Image Gallery
+const galleryItems = document.querySelectorAll('.gallery-item');
+
+galleryItems.forEach(item => {
+    item.addEventListener('mouseenter', () => {
+        item.querySelector('.gallery-overlay').style.transform = 'translateY(0)';
+    });
+
+    item.addEventListener('mouseleave', () => {
+        item.querySelector('.gallery-overlay').style.transform = 'translateY(100%)';
+    });
+});
+
+// Contact Form Handling
+const contactForm = document.querySelector('.contact-form');
+
+contactForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const formData = new FormData(contactForm);
+    const submitButton = contactForm.querySelector('.submit-btn');
+    
+    // Disable submit button and show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+    
+    try {
+        // Simulate form submission (replace with actual API endpoint)
+        await new Promise(resolve => setTimeout(resolve, 1500));
+        
+        // Show success message
+        showNotification('Message sent successfully!', 'success');
+        contactForm.reset();
+    } catch (error) {
+        // Show error message
+        showNotification('Failed to send message. Please try again.', 'error');
+    } finally {
+        // Reset submit button
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Send Message';
+    }
+});
+
+// Notification System
+function showNotification(message, type = 'success') {
+    const notification = document.createElement('div');
+    notification.className = `notification ${type}`;
+    notification.innerHTML = `
+        <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
+        <span>${message}</span>
     `;
-
-    return star;
+    
+    document.body.appendChild(notification);
+    
+    // Trigger animation
+    setTimeout(() => notification.classList.add('show'), 100);
+    
+    // Remove notification after 3 seconds
+    setTimeout(() => {
+        notification.classList.remove('show');
+        setTimeout(() => notification.remove(), 300);
+    }, 3000);
 }
 
-function createShootingStar() {
-    const shootingStar = document.createElement('div');
-    const startY = Math.random() * 100;
-    const curve = Math.random() * 50 - 25;
-    const hue = Math.random() * 360;
-
-    shootingStar.style.cssText = `
+// Add notification styles
+const style = document.createElement('style');
+style.textContent = `
+    .notification {
         position: fixed;
-        width: ${200 + Math.random() * 100}px;
-        height: 2px;
-        background: linear-gradient(
-            90deg, 
-            transparent, 
-            hsl(${hue}, 80%, 70%), 
-            transparent
-        );
-        filter: blur(1px);
-        animation: shoot ${0.8 + Math.random() * 0.4}s linear;
-        z-index: 999;
-        top: ${startY}%;
-        opacity: ${0.8 + Math.random() * 0.2};
-        transform: translateY(${curve}px);
-    `;
+        bottom: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        border-radius: 5px;
+        background: var(--dark-color);
+        color: var(--light-color);
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transform: translateY(100px);
+        opacity: 0;
+        transition: all 0.3s ease;
+        z-index: 1000;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .notification.show {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .notification.success {
+        border-left: 4px solid var(--accent-color);
+    }
+    
+    .notification.error {
+        border-left: 4px solid #ff4444;
+    }
+    
+    .notification i {
+        font-size: 1.2rem;
+    }
+    
+    .notification.success i {
+        color: var(--accent-color);
+    }
+    
+    .notification.error i {
+        color: #ff4444;
+    }
+`;
+document.head.appendChild(style);
 
-    document.body.appendChild(shootingStar);
-    setTimeout(() => shootingStar.remove(), 1500);
-}
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1
+};
 
-createGalaxy();
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('fade-in');
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.section, .feature-card, .gallery-item').forEach(el => {
+    observer.observe(el);
+});
+
+

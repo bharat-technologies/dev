@@ -1,48 +1,45 @@
-# My Project Frontend
+# Bharat Technologies Website
 
-This directory contains the frontend code for the "my-dev-website" project, which is built using React and TypeScript.
+Welcome to the official repository for the **Bharat Technologies** website. This project showcases the company's services, products, and technological innovations.
 
 ## Table of Contents
 
-- [Installation](#installation)
-- [Usage](#usage)
-- [Development](#development)
-- [Testing](#testing)
-- [Contributing](#contributing)
-- [License](#license)
+- [Overview](#overview)
+- [Features](#features)
+- [Technologies Used](#technologies-used)
+- [File Structure](#file-structure)
+- [How to Run](#how-to-run)
+- [Contact](#contact)
 
-## Installation
+---
 
-To install the frontend dependencies, run:
+## Overview
 
-```
-npm install
-```
+Bharat Technologies is at the forefront of technological innovation, specializing in AI, cloud computing, cybersecurity, and space technologies. This website provides an overview of the company's offerings, including services, products, and contact information.
 
-## Usage
+---
 
-To start the frontend application, use the following command:
+## Features
 
-```
-npm start
-```
+- **Hero Section**: A visually appealing introduction to Bharat Technologies.
+- **Dropdown Menus**: Interactive navigation for exploring company details, technologies, products, and services.
+- **About Section**: Highlights the company's expertise in AI, cloud, cybersecurity, and space technologies.
+- **Image Gallery**: Showcases AI solutions with hover effects.
+- **Contact Section**: Includes a contact form and quick links for phone, email, and AI assistant.
+- **Responsive Design**: Optimized for desktop and mobile devices.
+- **Footer**: Quick links and social media integration.
 
-## Development
+---
 
-The main entry point for the application is located at `src/index.tsx`, which renders the main `App` component.
+## Technologies Used
 
-## Testing
+- **HTML5**: For structuring the content.
+- **CSS3**: For styling and layout.
+- **JavaScript**: For interactivity (e.g., dropdown menus).
+- **Font Awesome**: For icons.
+- **AOS (Animate On Scroll)**: For scroll animations.
+- **Responsive Design**: Ensures compatibility across devices.
 
-Unit tests for the frontend application can be found in the `tests/frontend` directory. To run the tests, use:
+---
 
-```
-npm test
-```
-
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request.
-
-## License
-
-This project is licensed under the MIT License.
+## File Structure

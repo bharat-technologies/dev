@@ -39,7 +39,7 @@ function togglebtn() {
 document.addEventListener('click', (e) => {
     const navLinks = document.querySelector('.main-nav-links');
     const menuButton = document.querySelector('.fa-bars');
-    
+
     if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
         navLinks.classList.remove('active');
     }
@@ -98,36 +98,6 @@ galleryItems.forEach(item => {
     });
 });
 
-// Contact Form Handling
-const contactForm = document.querySelector('.contact-form');
-
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const formData = new FormData(contactForm);
-    const submitButton = contactForm.querySelector('.submit-btn');
-    
-    // Disable submit button and show loading state
-    submitButton.disabled = true;
-    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-    
-    try {
-        // Simulate form submission (replace with actual API endpoint)
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        
-        // Show success message
-        showNotification('Message sent successfully!', 'success');
-        contactForm.reset();
-    } catch (error) {
-        // Show error message
-        showNotification('Failed to send message. Please try again.', 'error');
-    } finally {
-        // Reset submit button
-        submitButton.disabled = false;
-        submitButton.innerHTML = 'Send Message';
-    }
-});
-
 // Notification System
 function showNotification(message, type = 'success') {
     const notification = document.createElement('div');
@@ -136,12 +106,12 @@ function showNotification(message, type = 'success') {
         <i class="fas ${type === 'success' ? 'fa-check-circle' : 'fa-exclamation-circle'}"></i>
         <span>${message}</span>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Trigger animation
     setTimeout(() => notification.classList.add('show'), 100);
-    
+
     // Remove notification after 3 seconds
     setTimeout(() => {
         notification.classList.remove('show');
@@ -217,27 +187,27 @@ document.querySelectorAll('.section, .feature-card, .gallery-item').forEach(el =
 // Replace the existing dropdown functionality with this simplified version
 document.addEventListener('DOMContentLoaded', () => {
     const dropdowns = document.querySelectorAll('.mn-dropdown');
-    
+
     // Handle dropdown toggle
     dropdowns.forEach(dropdown => {
         const link = dropdown.querySelector('a');
         const content = dropdown.querySelector('.mn-dropdown-content');
-        
+
         link.addEventListener('click', (e) => {
             e.preventDefault();
-            
+
             // Close all other dropdowns
             dropdowns.forEach(otherDropdown => {
                 if (otherDropdown !== dropdown) {
                     otherDropdown.querySelector('.mn-dropdown-content').classList.remove('active');
                 }
             });
-            
+
             // Toggle current dropdown
             content.classList.toggle('active');
         });
     });
-    
+
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.mn-dropdown')) {

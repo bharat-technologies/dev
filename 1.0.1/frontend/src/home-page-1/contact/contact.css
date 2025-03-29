@@ -169,7 +169,7 @@ body {
 
 .contact-form input:focus,
 .contact-form textarea:focus {
-    border-color: var(--primary-color);
+    border-color: var(--light-color);
     background: rgba(255, 255, 255, 0.1);
     outline: none;
 }
@@ -181,8 +181,7 @@ body {
 
 .submit-btn {
     padding: 1rem 2rem;
-    background: var(--primary-color);
-    color: var(--light-color);
+    color: var(--dark-color);
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -193,10 +192,9 @@ body {
 }
 
 .submit-btn:hover {
-    background: var(--accent-color);
+    background:rgb(255, 252, 252);
     color: var(--dark-color);
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer Styles */

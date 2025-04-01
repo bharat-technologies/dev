@@ -4,20 +4,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bharat Technologies</title>
+  <title>Contact Us - Bharat Technologies</title>
+  <link rel="stylesheet" href="./contact/contact.css">
   <script src="https://kit.fontawesome.com/730be06ba5.js" crossorigin="anonymous"></script>
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-  <div class="loader">
-    <div class="loader-content">
-      <div class="spinner"></div>
-      <p>Loading...</p>
-    </div>
-  </div>
-
+  <!-- Navigation -->
   <nav class="main-nav" id="main-nav">
     <div class="logo">
       <img src="./img/logo.jpg" alt="Bharat Technologies Logo">
@@ -87,100 +81,23 @@
     <i class="fa-solid fa-bars" onclick="togglebtn()"></i>
   </nav>
 
-  <!-- Hero Section -->
-  <header class="hero">
-    <div class="hero-content">
-      <h1 data-aos="fade-up">Welcome to Bharat Technologies</h1>
-      <p data-aos="fade-up" data-aos-delay="200">Innovating the future with cutting-edge technology solutions.</p>
-      <div class="hero-buttons" data-aos="fade-up" data-aos-delay="400">
-        <a href="#" class="hero-button primary">Learn More</a>
-        <a href="#" class="hero-button secondary">Get Started</a>
-      </div>
-    </div>
-    <div class="hero-image-container" data-aos="fade-left">
-      <img src="./img/ai-tech-02.svg" alt="AI Technology" class="hero-image">
-    </div>
-  </header>
 
-  <!-- About Section -->
-  <section id="about" class="section">
-    <div class="section-content">
-      <h2 data-aos="fade-up">About Us</h2>
-      <p data-aos="fade-up" data-aos-delay="200">We specialize in AI, cloud, cybersecurity, and space technologies to shape a better future.</p>
-      <div class="features-grid" data-aos="fade-up" data-aos-delay="400">
-        <div class="feature-card">
-          <i class="fas fa-robot"></i>
-          <h3>AI Solutions</h3>
-          <p>Advanced artificial intelligence solutions for modern businesses</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-shield-alt"></i>
-          <h3>Cyber Security</h3>
-          <p>Protecting your digital assets with cutting-edge security</p>
-        </div>
-        <div class="feature-card">
-          <i class="fas fa-cloud"></i>
-          <h3>Cloud Services</h3>
-          <p>Scalable cloud solutions for growing enterprises</p>
-        </div>
+  <!-- Contact Form Container -->
+  <div class="contact-container">
+    <div class="contact-form-wrapper">
+      <div class="get-in-touch">
+        <h2>Get in Touch</h2>
+        <p>We'd love to hear from you. Send us a message.</p>
       </div>
+      <form class="contact-form" id="contactForm">
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <input type="text" name="phone" placeholder="Your Phone" min="" required>
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        <button type="submit" class="submit-btn">Send Message</button>
+      </form>
     </div>
-  </section>
-
-  <!-- Image Gallery -->
-  <section class="image-gallery">
-    <h2 data-aos="fade-up">Our AI Solutions</h2>
-    <div class="gallery-container" data-aos="fade-up" data-aos-delay="200">
-      <div class="gallery-item">
-        <img src="./img/ai-farmer-tech.webp" alt="AI Tech 1">
-        <div class="gallery-overlay">
-          <h3>AI in Agriculture</h3>
-          <p>Revolutionizing farming with AI technology</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="./img/ai-tech-03.svg" alt="AI Tech 2">
-        <div class="gallery-overlay">
-          <h3>Smart Solutions</h3>
-          <p>Intelligent systems for modern businesses</p>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <img src="./img/ai-tech-img1.png" alt="AI Tech 3">
-        <div class="gallery-overlay">
-          <h3>Future Tech</h3>
-          <p>Pioneering the future of technology</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section
-  <section id="contact" class="section contact-section">
-    <div class="section-content">
-      <h2 data-aos="fade-up">Contact Us</h2>
-      <div class="contact-container" data-aos="fade-up" data-aos-delay="200">
-        <div class="contact-info">
-          <div class="contact-item">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-phone"></i>
-          </div>
-          <div class="contact-item">
-            <i class="fas fa-map-marker-alt"></i>
-            <p>123 Tech Street, Innovation City</p>
-          </div>
-        </div>
-        <form class="contact-form">
-          <input type="text" placeholder="Your Name" required>
-          <input type="email" placeholder="Your Email" required>
-          <textarea placeholder="Your Message" required></textarea>
-          <button type="submit" class="submit-btn">Send Message</button>
-        </form>
-      </div>
-    </div>
-  </section> -->
+  </div>
 
   <!-- Footer -->
   <footer class="primary-footer">
@@ -192,10 +109,10 @@
       <div class="footer-section">
         <h3>Quick Links</h3>
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about-us.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="contact.html">Contact</a></li>
         </ul>
       </div>
       <div class="footer-section">
@@ -213,16 +130,8 @@
     </div>
   </footer>
 
-
-
-  <!-- Back to Top Button -->
-  <button id="backToTop" class="back-to-top">
-    <i class="fas fa-arrow-up"></i>
-  </button>
-
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script src="index.js"></script>
+  <script src="./contact/contact.js"></script>
 </body>
 
 </html>

@@ -1,24 +1,18 @@
-// Initialize AOS (Animate On Scroll)
 AOS.init({
     duration: 1000,
     once: true,
     offset: 100
 });
 
-// Loader
-window.addEventListener('load', () => {
-    const loader = document.querySelector('.loader');
-    loader.style.opacity = '0';
-    setTimeout(() => {
-        loader.style.display = 'none';
-    }, 500);
-});
+// Mobile Menu Toggle
+function toggleMobileMenu() {
+    const navLinks = document.querySelector('.main-nav-links');
+    navLinks.classList.toggle('active');
+}
 
-// Navigation
 const mainNav = document.getElementById('main-nav');
 const navLinks = document.querySelectorAll('.main-nav-links a');
 
-// Change navbar background on scroll
 window.addEventListener('scroll', () => {
     if (window.scrollY > 50) {
         mainNav.style.background = 'rgba(0, 0, 0, 0.95)';
@@ -29,7 +23,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Mobile menu toggle
 function togglebtn() {
     const navLinks = document.querySelector('.main-nav-links');
     navLinks.classList.toggle('active');
@@ -39,13 +32,12 @@ function togglebtn() {
 document.addEventListener('click', (e) => {
     const navLinks = document.querySelector('.main-nav-links');
     const menuButton = document.querySelector('.fa-bars');
-
+    
     if (!navLinks.contains(e.target) && !menuButton.contains(e.target)) {
         navLinks.classList.remove('active');
     }
 });
 
-// Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
         e.preventDefault();
@@ -67,34 +59,35 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     });
 });
 
-// Back to Top Button
-const backToTopButton = document.getElementById('backToTop');
 
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 300) {
-        backToTopButton.style.display = 'flex';
-    } else {
-        backToTopButton.style.display = 'none';
-    }
-});
+// Dropdown Functionality
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdowns = document.querySelectorAll('.mn-dropdown');
 
-backToTopButton.addEventListener('click', () => {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
+    dropdowns.forEach(dropdown => {
+        const link = dropdown.querySelector('a');
+        const content = dropdown.querySelector('.mn-dropdown-content');
 
-// Image Gallery
-const galleryItems = document.querySelectorAll('.gallery-item');
+        link.addEventListener('click', (e) => {
+            e.preventDefault();
 
-galleryItems.forEach(item => {
-    item.addEventListener('mouseenter', () => {
-        item.querySelector('.gallery-overlay').style.transform = 'translateY(0)';
+            dropdowns.forEach(otherDropdown => {
+                if (otherDropdown !== dropdown) {
+                    otherDropdown.querySelector('.mn-dropdown-content')?.classList.remove('active');
+                }
+            });
+
+            content?.classList.toggle('active');
+        });
     });
 
-    item.addEventListener('mouseleave', () => {
-        item.querySelector('.gallery-overlay').style.transform = 'translateY(100%)';
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.mn-dropdown')) {
+            dropdowns.forEach(dropdown => {
+                dropdown.querySelector('.mn-dropdown-content')?.classList.remove('active');
+            });
+        }
     });
 });
 
@@ -118,6 +111,27 @@ function showNotification(message, type = 'success') {
         setTimeout(() => notification.remove(), 300);
     }, 3000);
 }
+
+// Contact Form Submission
+document.getElementById('contactForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+    const submitButton = this.querySelector('.submit-btn');
+
+    // Disable submit button and show loading state
+    submitButton.disabled = true;
+    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+
+    // Simulate form submission
+    setTimeout(() => {
+        // Reset form and button
+        this.reset();
+        submitButton.disabled = false;
+        submitButton.innerHTML = 'Send Message';
+
+        // Show success message (you could replace this with actual notification system)
+        showNotification('Message sent successfully!', 'success');
+    }, 1500);
+});
 
 // Add notification styles
 const style = document.createElement('style');
@@ -166,56 +180,3 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add('fade-in');
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.section, .feature-card, .gallery-item').forEach(el => {
-    observer.observe(el);
-});
-
-// Replace the existing dropdown functionality with this simplified version
-document.addEventListener('DOMContentLoaded', () => {
-    const dropdowns = document.querySelectorAll('.mn-dropdown');
-
-    // Handle dropdown toggle
-    dropdowns.forEach(dropdown => {
-        const link = dropdown.querySelector('a');
-        const content = dropdown.querySelector('.mn-dropdown-content');
-
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            // Close all other dropdowns
-            dropdowns.forEach(otherDropdown => {
-                if (otherDropdown !== dropdown) {
-                    otherDropdown.querySelector('.mn-dropdown-content').classList.remove('active');
-                }
-            });
-
-            // Toggle current dropdown
-            content.classList.toggle('active');
-        });
-    });
-
-    // Close dropdowns when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!e.target.closest('.mn-dropdown')) {
-            dropdowns.forEach(dropdown => {
-                dropdown.querySelector('.mn-dropdown-content').classList.remove('active');
-            });
-        }
-    });
-});
-
-

@@ -37,3 +37,14 @@ Contributions are welcome! Please open an issue or submit a pull request.
 ## License
 
 This project is licensed under the MIT License.
+
+---
+
+### Uday Krishna Branch (Udhay)
+
+- Implemented backend for form storing.
+- Followed the repository pattern for better maintainability.
+- Implemented encryption to store sensitive data securely.
+- Stored forms in MongoDB for efficient data management.
+- Enhanced error handling for better stability and debugging.
+- Handle email validation that support exsisting emails

@@ -1,0 +1,1 @@
+export type { IForm } from "./form.interface"
